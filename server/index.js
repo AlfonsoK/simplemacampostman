@@ -13,13 +13,16 @@ server.use(cors());
 
 server.route('/')
   .get((req, res) => {
-    res.send('Hello World!\n')
+    let params = req.params;
+    res.send('Yes, default GET route works.\n')
   })
   .post((req, res) => {
-    axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+    let body = req.body;
+    let url = 'https://api.nasa.gov/planetary/apod?api_key=RPuX87WMDWKkZY6dhNV8PtfbVLuIZdYGrCwiMmH8';    
+    
+    axios.get(url)
     .then(response => {
       console.log(response.data.url);
-      console.log(response.data.explanation);
       res.status(200).send(response.data.explanation)
     })
     .catch(error => {
